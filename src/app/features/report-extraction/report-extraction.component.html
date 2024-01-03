@@ -1,0 +1,53 @@
+<div
+  class="report-component d-flex flex-column gap-4 justify-content-center flex-wrap align-content-center"
+>
+  <header class="dipa-2-0-header w-100">
+    <div class="header-container d-flex">
+      <div class="d-flex left-section">
+        <div class="brand">
+          <span>Admin</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div
+    class="d-flex gap-4 justify-content-center flex-wrap align-content-center"
+  >
+    <mat-form-field>
+      <input matInput placeholder="Agent ID" [(ngModel)]="agentId" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <!-- <mat-label>FROM -TO</mat-label> -->
+      <mat-date-range-input [rangePicker]="picker" [max]="today">
+        <input
+          matStartDate
+          placeholder="From"
+          readonly
+          (click)="picker.open()"
+          [(ngModel)]="fromDate"
+        />
+        <input
+          matEndDate
+          placeholder="To"
+          readonly
+          (click)="picker.open()"
+          [(ngModel)]="toDate"
+        />
+      </mat-date-range-input>
+
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker
+        #picker
+        disabled="false"
+        (closed)="checkDates()"
+      ></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+  <div class="d-flex justify-content-center gap-4">
+    <button class="btn btn-outline-primary" (click)="downloadReport()">
+      Download Report
+    </button>
+    <button class="btn btn-outline-primary" (click)="reset()">Reset</button>
+  </div>
+</div>
