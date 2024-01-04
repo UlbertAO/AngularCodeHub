@@ -1,3 +1,10 @@
+<p align="center">
+    <img alt="AngularCodeHub" src="docs/images/AngularCodeHub.png"><br>
+    <span>Angular code samples and solutions, simplifying your Angular development journey.</span>
+</p>
+
+---
+
 # AngularCodeHub
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
