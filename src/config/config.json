@@ -1,5 +1,5 @@
 {
-  "baseurl": {
-    "ReportExtraction": "/ReportExtraction"
+  "apiBaseUrl": {
+    "ReportExtraction": "http://localhost:4200/ReportExtraction"
   }
 }

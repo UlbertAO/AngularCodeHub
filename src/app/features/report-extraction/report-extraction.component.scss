@@ -1,0 +1,29 @@
+.report-component {
+  width: 100vw;
+  height: 100vh;
+
+  .dipa-2-0-header {
+    padding: 1rem 2rem;
+    color: white;
+    background-image: url("../../../assets/images/Banner.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+
+    .header-container {
+      align-items: baseline;
+      justify-content: space-between;
+
+      .left-section {
+        flex: 1 1 33%;
+
+        .brand {
+          img {
+            width: 15rem;
+          }
+        }
+      }
+    }
+  }
+}

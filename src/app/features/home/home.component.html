@@ -1,0 +1,11 @@
+<header>
+  <nav>
+    <ol>
+      <ng-container *ngFor="let route of routes">
+        <li>
+          <a [routerLink]="route">{{ route }}</a>
+        </li>
+      </ng-container>
+    </ol>
+  </nav>
+</header>
