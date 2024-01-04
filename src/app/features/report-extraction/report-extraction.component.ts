@@ -44,46 +44,50 @@ export class ReportExtractionComponent {
   }
 
   downloadReport() {
-    this.eventEmitterService.showLoader();
-    let tempToDate: Date | null = null;
-    if (this.toDate) {
-      tempToDate = new Date(this.toDate);
-      tempToDate?.setDate(tempToDate.getDate() + 1); //+1 as we need data for all day
-    }
-    this.appSetting.RequestId = this.appSetting.generateUUID();
+    if (this.fromDate == null || this.toDate == null) {
+      this.checkDates();
+    } else {
+      this.eventEmitterService.showLoader();
+      let tempToDate: Date | null = null;
+      if (this.toDate) {
+        tempToDate = new Date(this.toDate);
+        tempToDate?.setDate(tempToDate.getDate() + 1); //+1 as we need data for all day
+      }
+      this.appSetting.RequestId = this.appSetting.generateUUID();
 
-    const payload: ReportExtractionReqModal = {
-      RequestId: this.appSetting.RequestId,
-      CorrelationId: this.appSetting.CorrelationId,
-      agentId: this.agentId,
-      startDateTime: this.fromDate,
-      endDateTime: tempToDate,
-    };
-    this.adminService.getReport(payload).subscribe({
-      next: (data) => {
-        this.eventEmitterService.hideLoader();
-        if (data.isSuccess) {
-          let binary_string = window.atob(data.responses);
-          const blob = new Blob([binary_string], { type: 'text/csv' });
-          const link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
-          link.download = 'Report.csv';
-          link.click();
-        } else {
-          this._snackBar.open(data.message, 'close', {
+      const payload: ReportExtractionReqModal = {
+        RequestId: this.appSetting.RequestId,
+        CorrelationId: this.appSetting.CorrelationId,
+        agentId: this.agentId,
+        startDateTime: this.fromDate,
+        endDateTime: tempToDate,
+      };
+      this.adminService.getReport(payload).subscribe({
+        next: (data) => {
+          this.eventEmitterService.hideLoader();
+          if (data.isSuccess) {
+            let binary_string = window.atob(data.responses);
+            const blob = new Blob([binary_string], { type: 'text/csv' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'Report.csv';
+            link.click();
+          } else {
+            this._snackBar.open(data.message, 'close', {
+              panelClass: 'danger-toast',
+              duration: 5000,
+            });
+          }
+        },
+        error: (error) => {
+          this.eventEmitterService.hideLoader();
+
+          this._snackBar.open('Something Went Wrong', 'close', {
             panelClass: 'danger-toast',
             duration: 5000,
           });
-        }
-      },
-      error: (error) => {
-        this.eventEmitterService.hideLoader();
-
-        this._snackBar.open('Something Went Wrong', 'close', {
-          panelClass: 'danger-toast',
-          duration: 5000,
-        });
-      },
-    });
+        },
+      });
+    }
   }
 }

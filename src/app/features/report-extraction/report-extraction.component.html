@@ -22,14 +22,14 @@
       <mat-date-range-input [rangePicker]="picker" [max]="today">
         <input
           matStartDate
-          placeholder="From"
+          placeholder="From *"
           readonly
           (click)="picker.open()"
           [(ngModel)]="fromDate"
         />
         <input
           matEndDate
-          placeholder="To"
+          placeholder="To *"
           readonly
           (click)="picker.open()"
           [(ngModel)]="toDate"

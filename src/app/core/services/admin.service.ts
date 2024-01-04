@@ -17,9 +17,12 @@ export class AdminService {
   getReport(
     payload: ReportExtractionReqModal
   ): Observable<ReportExtractionResModal> {
-    return this.http.post<ReportExtractionResModal>(
-      this.appSetting.baseURLs?.ReportExtraction,
-      payload
+    // return this.http.post<ReportExtractionResModal>(
+    //   this.appSetting.baseURLs?.ReportExtraction,
+    //   payload
+    // );
+    return this.http.get<ReportExtractionResModal>(
+      '../../../assets/response/reportExtraction.json'
     );
   }
 }
