@@ -48,18 +48,33 @@ export class ReportExtractionComponent {
       this.checkDates();
     } else {
       this.eventEmitterService.showLoader();
+
+      // From
+      let tempFromDate: Date | null = null;
+      if (this.fromDate) {
+        tempFromDate = new Date(this.fromDate);
+        tempFromDate?.setDate(tempFromDate.getDate() + 1); // we need data for all day
+        tempFromDate.setUTCHours(0);
+        tempFromDate.setUTCMinutes(0);
+        tempFromDate.setUTCSeconds(0);
+      }
+      // To
       let tempToDate: Date | null = null;
       if (this.toDate) {
         tempToDate = new Date(this.toDate);
-        tempToDate?.setDate(tempToDate.getDate() + 1); //+1 as we need data for all day
+        tempToDate?.setDate(tempToDate.getDate() + 1); // we need data for all day
+        tempToDate.setUTCHours(23);
+        tempToDate.setUTCMinutes(59);
+        tempToDate.setUTCSeconds(59);
       }
+
       this.appSetting.RequestId = this.appSetting.generateUUID();
 
       const payload: ReportExtractionReqModal = {
         RequestId: this.appSetting.RequestId,
         CorrelationId: this.appSetting.CorrelationId,
         agentId: this.agentId,
-        startDateTime: this.fromDate,
+        startDateTime: tempFromDate,
         endDateTime: tempToDate,
       };
       this.adminService.getReport(payload).subscribe({
