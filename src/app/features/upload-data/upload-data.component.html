@@ -1,0 +1,110 @@
+<div class="upload-component">
+  <header class="admin-header w-100">
+    <div class="header-container d-flex">
+      <div class="d-flex left-section">
+        <div class="brand">
+          <a [href]="uploadRoute">
+            <span>Admin</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div
+    class="uploader-container m-5 h-50 d-flex flex-column justify-content-between align-items-center gap-2"
+    (dragover)="onDragOver($event)"
+    (drop)="onDropSuccess($event)"
+  >
+    <div class="template-content">
+      <span class="Upload-KB-Details">Upload KB Details</span>
+      <span class="Download-template"
+        ><a
+          href="src/assets/files/Upload Data Downloadable Sample Template.xlsx"
+          download
+          >Download template</a
+        ></span
+      >
+    </div>
+    <div class="upload-content">
+      <ng-container *ngIf="!kbFile; else FileUploaded">
+        <button class="upload-icon" (click)="file.click()">
+          <img src="../../../assets/svgs/upload.svg" alt=">" />
+        </button>
+        <div
+          class="text-wrapper d-flex flex-column justify-content-center align-items-center"
+        >
+          <input
+            type="file"
+            name="file"
+            id="file"
+            #file
+            (change)="onFileChange($event)"
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          />
+
+          <span class="upload-msg"
+            >Drag and drop or
+            <a href="javascript:void(0);" (click)="file.click()"
+              >Browse to upload</a
+            >
+            if you already have it</span
+          >
+        </div>
+      </ng-container>
+      <ng-template #FileUploaded>
+        <div class="FileUploaded-container d-flex flex-column gap-3">
+          <div
+            class="uploader-loader-container position-relative d-flex align-items-center justify-content-center"
+          >
+            <div class="uploader-loader" #uploaderLoader></div>
+            <img
+              *ngIf="uploadStatus?.status === true"
+              class="check-mark-icon position-absolute"
+              src="../../../assets/svgs/uploader-success.svg"
+              alt=">"
+              width="40px"
+              height="40px"
+            />
+            <img
+              *ngIf="uploadStatus?.status === false"
+              class="check-mark-icon position-absolute"
+              src="../../../assets/svgs/uploader-fail.svg"
+              alt=">"
+              width="24px"
+              height="24px"
+            />
+          </div>
+          <div
+            *ngIf="uploadStatus === null"
+            class="file-name text-truncate d-flex gap-2 justify-content-between align-items-center"
+          >
+            <span class="text-truncate">{{ kbFile ? kbFile.name : "NA" }}</span>
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Close"
+              (click)="reset()"
+            ></button>
+          </div>
+          <div
+            *ngIf="uploadStatus !== null"
+            class="d-flex gap-2 flex-column justify-content-center align-items-center"
+          >
+            <div
+              class="text-truncate d-flex gap-2 justify-content-between align-items-center bg-white"
+            >
+              <span class="text-truncate"
+                >{{ kbFile ? kbFile.name : "NA" }},</span
+              >
+              <span *ngIf="uploadStatus.status">upload successful!</span>
+              <span *ngIf="!uploadStatus.status">upload failed</span>
+            </div>
+            <span *ngIf="uploadStatus.msg" class="uploader-error">{{
+              uploadStatus.msg
+            }}</span>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

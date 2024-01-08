@@ -1,0 +1,182 @@
+.upload-component {
+  width: 100vw;
+  height: 100vh;
+
+  .admin-header {
+    padding: 1rem 2rem;
+    color: white;
+    background-image: url("../../../assets/images/Banner.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    .header-container {
+      align-items: baseline;
+      justify-content: space-between;
+
+      .left-section {
+        flex: 1 1 33%;
+
+        .brand > a {
+          color: white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .uploader-container {
+    .template-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .Upload-KB-Details {
+        font-size: x-large;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+
+    .upload-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+
+      .upload-icon {
+        border: none;
+        background: transparent;
+        scale: 2.5;
+      }
+
+      button {
+        &:focus-visible {
+          border: none;
+        }
+      }
+
+      .text-wrapper {
+        input[type="file"] {
+          display: none;
+        }
+      }
+
+      .upload-msg {
+        text-align: center;
+      }
+
+      .FileUploaded-container {
+        .uploader-error {
+          color: #d60000;
+          font-size: 0.7rem;
+        }
+
+        .uploader-loader-container {
+          .check-mark-icon {
+            margin: auto;
+            inset: 0;
+          }
+        }
+
+        .uploader-loader,
+        .uploader-loader:after {
+          border-radius: 50%;
+          width: 4rem;
+          height: 4rem;
+        }
+
+        .uploader-loader {
+          // margin: 60px auto;
+          font-size: 10px;
+          position: relative;
+          border-top: 1.1em solid #ebebeb;
+          border-right: 1.1em solid #ebebeb;
+          border-bottom: 1.1em solid #ebebeb;
+          border-left: 1.1em solid #9a00d3;
+          -webkit-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          transform: translateZ(0);
+          -webkit-animation: load8 0.8s infinite linear;
+          animation: load8 0.8s infinite linear;
+        }
+
+        @-webkit-keyframes load8 {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes load8 {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+
+        .file-name {
+          background-color: #ebebeb;
+          padding: 0.5rem 1rem;
+          border-radius: 0.3rem;
+          max-width: 30rem;
+          width: fit-content;
+
+          .btn-close {
+            &:focus {
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dragOver {
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .upload-component {
+    .dipa-2-0-header {
+      // 481
+      .header-container {
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: space-between;
+      }
+    }
+
+    .uploader-container {
+      .upload-content {
+        .FileUploaded-container {
+          .file-name {
+            .text-truncate {
+              white-space: break-spaces;
+              word-break: break-all;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,13 @@ const routes: Routes = [
         (m) => m.ReportExtractionModule
       ),
   },
+    {
+    path: Route.UploadData,
+    loadChildren: () =>
+      import('./features/upload-data/upload-data.module').then(
+        (m) => m.UploadDataModule
+      ),
+  },
   {
     path: '',
     loadChildren: () =>

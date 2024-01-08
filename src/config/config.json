@@ -1,5 +1,6 @@
 {
   "apiBaseUrl": {
-    "ReportExtraction": "http://localhost:4200/ReportExtraction"
+    "ReportExtraction": "http://localhost:4200/ReportExtraction",
+    "UploadData": "http://localhost:4200/UploadData"
   }
 }
